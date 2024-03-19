@@ -45,17 +45,33 @@ function playRound(playerSelection, computerSelection) {
         console.log("You won! scissors beat paper");
         return playerPoint = playerPoint + 1;
     } else {
-        return "Something's wrong"
+        console.log("Something's wrong, chose one more time!");
+        playRound();
     }
 }
 
-playRound();
-playRound();
-playRound();
-// function that allows play 5 round
+// function that allows play n round
 
-console.log(playerPoint);
-console.log(computerPoint) 
+function playGame() {
+
+    let n = prompt("how many games", 3);
+    for (let i = 1; i <= n; i++) {
+        playRound();
+    }
 
 
-// info about the game result
+    // info about the game result
+
+    console.log(`computer ${computerPoint} : player ${playerPoint} `);
+    
+    if (playerPoint > computerPoint) {
+        console.log('YOU WON CONGRATS');
+    } else { console.log("Not this time. Try again!"); }
+}
+
+    playGame();
+
+
+// console.log(playerPoint);
+// console.log(computerPoint) 
+
