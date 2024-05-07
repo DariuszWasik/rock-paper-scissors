@@ -31,11 +31,12 @@ function playRound(playerSelection, computerSelection) {
         console.log( "It' a tie");
     }
     else if (playerSelection.toLowerCase() === "paper" && computerSelection === "rock") {
-        console.log("You won! paper beats scissors")
+        console.log("You won! paper beats rock")
         return playerPoint = playerPoint + 1;
     }
     else if (playerSelection.toLowerCase() === "scissors" && computerSelection === "scissors") {
-        return "It's a tie"
+        console.log("Its a tie")
+        
     }
     else if (playerSelection.toLowerCase() === "scissors" && computerSelection === "rock") {
         console.log ( "You lose! rock beats scissors");
