@@ -3,65 +3,70 @@ let choices = ["rock" , "paper" , "scissors"];
 function getComputerChoice() {
     return choices[Math.floor(Math.random() * 3)]
 }
-let playerSelection = ""
+let playerSelection;
 
 
 //create buttons that allows player to choose his item
 const buttons = document.querySelectorAll("#buttons");
 console.log(buttons);
 const btn = document.querySelectorAll("#buttons > button");
-
+console.log("btn", btn)
 btn.forEach((i) => {
     i.addEventListener("click", f => {
         playerSelection = i.innerHTML;
         console.log("player:", playerSelection);
-        return playerSelection
+        return playerSelection;})  
     })
+
+    btn.forEach((i) => {
     i.addEventListener("click", playRound)
-
-})
-
-
-
-
-// function that compares player and computer choices 
-let playerPoint = 0;
-let computerPoint = 0;
-
-function playRound(playerSelection, computerSelection) {
-    computerSelection = getComputerChoice();
-    console.log(computerSelection);
-    console.log(playerSelection, "z funkcji")
-    if (playerSelection = "rock" && computerSelection == "rock") {
-        console.log("It's a tie");
-
-    } else if (playerSelection = "rock" && computerSelection == "paper") {
-        console.log ( "You lose! paper beats rock" );
-        return computerPoint = computerPoint + 1;
-        
-    } else if (playerSelection = "rock" && computerSelection == "scissors") {
-        console.log ("You won! rock beats scissors")
-        return playerPoint = playerPoint + 1;
-        
-    } else if (playerSelection = "paper" && computerSelection == "scissors") {
+    })
+    
+    btn.forEach((i) => {
+    i.addEventListener("click", compareResults)
+    })
+    
+    
+    
+    // function that compares player and computer choices 
+    var playerPoint = 0;
+    var computerPoint = 0;
+    
+    function playRound(player, computerSelection) {
+        computerSelection = getComputerChoice();
+        console.log("comp", computerSelection);
+        player  = playerSelection
+        console.log("player", player)
+        if (player == "rock" && computerSelection == "rock") {
+            console.log("It's a tie");
+            
+        } else if (player == "rock" && computerSelection == "paper") {
+            console.log ( "You lose! paper beats rock" );
+            return computerPoint = computerPoint + 1;
+            
+        } else if (player == "rock" && computerSelection == "scissors") {
+            console.log ("You won! rock beats scissors")
+            return playerPoint = playerPoint + 1;
+            
+    } else if (player == "paper" && computerSelection == "scissors") {
         console.log( "You lose! scissors beats paper")
         return computerPoint = computerPoint + 1;
     }
-    else if (playerSelection = "paper" && computerSelection == "paper") {
-        console.log( "It' a tie");
+    else if (player == "paper" && computerSelection == "paper") {
+    console.log( "It' a tie");
     }
-    else if (playerSelection = "paper" && computerSelection == "rock") {
+    else if (player == "paper" && computerSelection == "rock") {
         console.log("You won! paper beats scissors")
         return playerPoint = playerPoint + 1;
     }
-    else if (playerSelection = "scissors" && computerSelection == "scissors") {
+    else if (player == "scissors" && computerSelection == "scissors") {
         return "It's a tie"
     }
-    else if (playerSelection = "scissors" && computerSelection == "rock") {
+    else if (player == "scissors" && computerSelection == "rock") {
         console.log ( "You lose! rock beats scissors");
         return computerPoint = computerPoint + 1;
     }
-    else if (playerSelection = "scissors" && computerSelection == "paper") {
+    else if (player == "scissors" && computerSelection == "paper") {
         console.log("You won! scissors beat paper");
         return playerPoint = playerPoint + 1;
     } else {
@@ -70,26 +75,46 @@ function playRound(playerSelection, computerSelection) {
     }
 }
 
-// // function that allows play n round
+function compareResults (a,b) {
+     a = playerPoint;
+     b = computerPoint;
+    if (a>4 && a>b){
+        console.log("YOU WIN!"); 
 
-// function playGame() {
-
-//     let n = prompt("how many games", 3);
-//     for (let i = 1; i <= n; i++) {
-//         playRound();
-//     }
- 
-
-//     // info about the game result
-
-//     console.log(`computer ${computerPoint} : player ${playerPoint} `);
+        i.removeEventListener("click", f => {
+            playerSelection = i.innerHTML;
+            console.log("player:", playerSelection);
+            return playerSelection;})  
+        
     
-//     if (playerPoint > computerPoint) {
-//         console.log('YOU WON CONGRATS');
-//     } else { console.log("Not this time. Try again!"); }
-// }
+        btn.forEach((i) => {
+        i.removeEventListener("click", playRound)
+        })
+        
+        btn.forEach((i) => {
+        i.removeEventListener("click", compareResults)
+        })
 
-//     playGame();
+    }
+    if (b>4){
+        console.log("YOU LOSE!");
+        btn.forEach((i) => {
+            i.removeEventListener("click", f => {
+                playerSelection = i.innerHTML;
+                console.log("player:", playerSelection);
+                return playerSelection;})  
+            })
+        
+            btn.forEach((i) => {
+            i.removeEventListener("click", playRound)
+            })
+            
+            btn.forEach((i) => {
+            i.removeEventListener("click", compareResults)
+            })
+        
+    }
+}
 
 
 // // console.log(playerPoint);
