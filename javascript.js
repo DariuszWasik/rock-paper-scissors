@@ -3,40 +3,57 @@ let choices = ["rock" , "paper" , "scissors"];
 function getComputerChoice() {
     return choices[Math.floor(Math.random() * 3)]
 }
+
 let playerSelection;
+let player = document.getElementById("player");
+let computer = document.getElementById("computer");
+let score = document.getElementById("score")
+score.innerHTML = `let's try to get 5 points`;
 
 
-//create buttons that allows player to choose his item
-const buttons = document.querySelectorAll("#buttons");
-console.log(buttons);
+
 const btn = document.querySelectorAll("#buttons > button");
-console.log("btn", btn)
+
 btn.forEach((i) => {
     i.addEventListener("click", f => {
         playerSelection = i.innerHTML;
-        console.log("player:", playerSelection);
-        return playerSelection;})  
-    })
+        player.innerHTML = `You choose : ${playerSelection}`;
+        return playerSelection;
+    })  
+})
 
-    btn.forEach((i) => {
+btn.forEach((i) => {
     i.addEventListener("click", playRound)
-    })
-    
-    btn.forEach((i) => {
-    i.addEventListener("click", compareResults)
-    })
-    
-    
-    
-    // function that compares player and computer choices 
-    var playerPoint = 0;
-    var computerPoint = 0;
-    
-    function playRound(player, computerSelection) {
-        computerSelection = getComputerChoice();
-        console.log("comp", computerSelection);
-        player  = playerSelection
-        console.log("player", player)
+})
+
+
+btn.forEach((i) => {
+    i.addEventListener("click", f => {    
+    score.innerHTML = `your points : ${playerPoint}  -  computer points : ${computerPoint}`})
+})
+
+btn.forEach((i) => {
+    i.addEventListener("click", f => {
+        if((playerPoint > 4) ){
+            score.innerHTML = `you win`
+            computer.innerHTML=""
+            player.innerHTML = ""
+        }
+        if (computerPoint > 4){
+            score.innerHTML = "you lose"
+            player.innerHTML = ""
+            computer.innerHTML=""
+        }
+        })})
+
+// function that compares player and computer choices 
+var playerPoint = 0;
+var computerPoint = 0;
+      
+function playRound(player, computerSelection) {
+    computerSelection = getComputerChoice();
+    computer.innerHTML = `Computer choose : ${computerSelection}`;
+    player  = playerSelection
         if (player == "rock" && computerSelection == "rock") {
             console.log("It's a tie");
             
@@ -48,13 +65,13 @@ btn.forEach((i) => {
             console.log ("You won! rock beats scissors")
             return playerPoint = playerPoint + 1;
             
-    } else if (player == "paper" && computerSelection == "scissors") {
+        } else if (player == "paper" && computerSelection == "scissors") {
         console.log( "You lose! scissors beats paper")
         return computerPoint = computerPoint + 1;
     }
     else if (player == "paper" && computerSelection == "paper") {
     console.log( "It' a tie");
-    }
+}
     else if (player == "paper" && computerSelection == "rock") {
         console.log("You won! paper beats scissors")
         return playerPoint = playerPoint + 1;
@@ -69,54 +86,5 @@ btn.forEach((i) => {
     else if (player == "scissors" && computerSelection == "paper") {
         console.log("You won! scissors beat paper");
         return playerPoint = playerPoint + 1;
-    } else {
-        console.log("Something's wrong, chose one more time!");
-        ;
-    }
-}
-
-function compareResults (a,b) {
-     a = playerPoint;
-     b = computerPoint;
-    if (a>4 && a>b){
-        console.log("YOU WIN!"); 
-
-        i.removeEventListener("click", f => {
-            playerSelection = i.innerHTML;
-            console.log("player:", playerSelection);
-            return playerSelection;})  
-        
-    
-        btn.forEach((i) => {
-        i.removeEventListener("click", playRound)
-        })
-        
-        btn.forEach((i) => {
-        i.removeEventListener("click", compareResults)
-        })
-
-    }
-    if (b>4){
-        console.log("YOU LOSE!");
-        btn.forEach((i) => {
-            i.removeEventListener("click", f => {
-                playerSelection = i.innerHTML;
-                console.log("player:", playerSelection);
-                return playerSelection;})  
-            })
-        
-            btn.forEach((i) => {
-            i.removeEventListener("click", playRound)
-            })
-            
-            btn.forEach((i) => {
-            i.removeEventListener("click", compareResults)
-            })
-        
-    }
-}
-
-
-// // console.log(playerPoint);
-// // console.log(computerPoint) 
+    }     }
 
